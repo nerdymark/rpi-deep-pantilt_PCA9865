@@ -1,15 +1,20 @@
 import logging
 from multiprocessing import Value, Process, Manager
-
-import pantilthat as pth
 import signal
 import sys
+
+from rpi_deep_pantilt.control import myCamMount as cm
 
 from rpi_deep_pantilt.detect.camera import run_pantilt_detect
 from rpi_deep_pantilt.control.pid import PIDController
 
+import time
+
 logging.basicConfig()
 LOGLEVEL = logging.getLogger().getEffectiveLevel()
+
+servoChannelTilt = 0
+servoChannelBase = 1
 
 RESOLUTION = (320, 320)
 
@@ -23,14 +28,19 @@ CENTER = (
 
 # function to handle keyboard interrupt
 
+setHome_y_x()
+
+def setHome_y_x():
+    # set servos to 0, 0 coordinates and disable them
+    cm.moveToPosition(servoChannelBase, 0, "pan")
+    cm.moveToPosition(servoChannelTilt, 0, "tilt")
+    time.sleep(1)
+    cm.resetServo(servoChannelBase)
+    cm.resetServo(servoChannelTilt)
 
 def signal_handler(sig, frame):
     # print a status message
     print("[INFO] You pressed `ctrl + c`! Exiting...")
-
-    # disable the servos
-    pth.servo_enable(1, False)
-    pth.servo_enable(2, False)
 
     # exit
     sys.exit()
@@ -51,12 +61,12 @@ def set_servos(pan, tilt):
 
         # if the pan angle is within the range, pan
         if in_range(pan_angle, SERVO_MIN, SERVO_MAX):
-            pth.pan(pan_angle)
+            cm.moveToPosition(servoChannelBase, pan_angle, "pan")
         else:
             logging.info(f'pan_angle not in range {pan_angle}')
 
         if in_range(tilt_angle, SERVO_MIN, SERVO_MAX):
-            pth.tilt(tilt_angle)
+            cm.moveToPosition(servoChannelTilt, tilt_angle, "tilt")
         else:
             logging.info(f'tilt_angle not in range {tilt_angle}')
 
