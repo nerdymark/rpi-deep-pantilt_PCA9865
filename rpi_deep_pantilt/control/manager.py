@@ -28,7 +28,6 @@ CENTER = (
 
 # function to handle keyboard interrupt
 
-setHome_y_x()
 
 def setHome_y_x():
     # set servos to 0, 0 coordinates and disable them
@@ -40,8 +39,8 @@ def setHome_y_x():
 
 def signal_handler(sig, frame):
     # print a status message
-    print("[INFO] You pressed `ctrl + c`! Exiting...")
-
+    print("[INFO] You pressed `ctrl + c`! Exiting...")  
+    setHome_y_x()
     # exit
     sys.exit()
 
