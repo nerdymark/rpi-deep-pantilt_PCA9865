@@ -39,6 +39,8 @@ Before you get started, you should have an up-to-date installation of Raspbian 1
 
 1. Install system dependencies
 
+Start here: https://coral.ai/docs/accelerator/get-started/#1-install-the-edge-tpu-runtime
+
 ```bash
 $ sudo apt-get update && sudo apt-get install -y \
     cmake python3-dev libjpeg-dev libatlas-base-dev raspi-gpio libhdf5-dev python3-smbus i2c-tools libopenjp2-7 libtiff5
