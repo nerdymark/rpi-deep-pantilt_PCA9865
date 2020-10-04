@@ -94,9 +94,6 @@ def pantilt_process_manager(
     labels=('person',),
     rotation=0
 ):
-
-    pth.servo_enable(1, True)
-    pth.servo_enable(2, True)
     with Manager() as manager:
         # set initial bounding box (x, y)-coordinates to center of frame
         center_x = manager.Value('i', 0)

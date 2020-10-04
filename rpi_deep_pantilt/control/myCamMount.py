@@ -17,6 +17,8 @@ if pwmHz == 50:
     originalMinTilt = 270
     originalMaxTilt = 550
 
+# Run sudo i2cdetect -y 1 to view your detected i2c addresses.
+
 pwm = Adafruit_PCA9685.PCA9685(address=0x40)
 pwm.set_pwm_freq(pwmHz)
 

@@ -41,7 +41,7 @@ Before you get started, you should have an up-to-date installation of Raspbian 1
 
 ```bash
 $ sudo apt-get update && sudo apt-get install -y \
-    cmake python3-dev libjpeg-dev libatlas-base-dev raspi-gpio libhdf5-dev python3-smbus
+    cmake python3-dev libjpeg-dev libatlas-base-dev raspi-gpio libhdf5-dev python3-smbus i2c-tools
 ```
 
 1. Create new virtual environment
